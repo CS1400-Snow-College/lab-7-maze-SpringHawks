@@ -1,74 +1,93 @@
 ﻿// Annette Hawks
 // Due 7/9/2025
 // Lab 7 Maze
+ {
+        // Maze Rules
+        string mazeRules = "MAZE RULES:\n" +
+            "1. Use the arrow keys to navigate the maze.\n" +
+            "2. The walls are hashtags (#).\n" +
+            "3. You want to find the asterisk * to win.\n";
 
-// Maze Rules
-string mazeRules = "MAZE RULES:\n" +
-    "1. Use the arrow keys to navigate the maze.\n" +
-    "2. The walls are hashtags (#).\n" +
-    "3. You want to find the asterisk * to win.\n";
+        Console.WriteLine(mazeRules);
 
-Console.WriteLine(mazeRules);
+        // Keep instructions up long enough for the person to read them
+        Console.WriteLine("Press any key to load maze...");
+        Console.ReadKey(true);
+        Console.Clear();
 
-// Keep instructions up long enough for the person to read them
-Console.WriteLine("Press any key to load maze...");
-Console.ReadKey(true);
+        // Load maze 
+        string[] mapRows = File.ReadAllLines("map.txt");
 
-Console.Clear();
+        // Display Maze
+        foreach (string row in mapRows)
+        {
+            Console.WriteLine(row);
+        }
 
+        // Start player at top left corner (0,0)
+        Console.SetCursorPosition(0, 0);
+        ConsoleKey keyStroke;
 
-// Load maze 
-string[] mapRows = File.ReadAllLines("map.txt");
+        do
+        {
+            keyStroke = Console.ReadKey(true).Key;
 
-// Display Maze
-foreach (string row in mapRows)
-{
-    Console.WriteLine(row);
-}
+            int cursorTop = Console.CursorTop;
+            int cursorLeft = Console.CursorLeft;
 
-// Start player at top left corner (0,0)
-Console.SetCursorPosition(0, 0);
-ConsoleKey keyStroke;
+            int newCursorTop = cursorTop;
+            int newCursorLeft = cursorLeft;
 
-bool winner = false;
+            switch (keyStroke)
+            {
+                case ConsoleKey.Escape:
+                    return;
 
-do
-{
-    keyStroke = Console.ReadKey(true).Key;
+                case ConsoleKey.UpArrow:
+                    newCursorTop = cursorTop - 1;
+                    break;
 
-    int cursorTop = Console.CursorTop;
-    int cursorLeft = Console.CursorLeft;
+                case ConsoleKey.DownArrow:
+                    newCursorTop = cursorTop + 1;
+                    break;
 
-    int newCursorTop = cursorTop;
-    int newCursorLeft = cursorLeft;
+                case ConsoleKey.LeftArrow:
+                    newCursorLeft = cursorLeft - 1;
+                    break;
 
-    switch (keyStroke)
-    {
-        case ConsoleKey.Escape:
-            return;
+                case ConsoleKey.RightArrow:
+                    newCursorLeft = cursorLeft + 1;
+                    break;
+            }
 
-        case ConsoleKey.UpArrow:
-            newCursorTop = cursorTop - 1;
-            break;
+            bool winner = TryMove(newCursorTop, newCursorLeft, mapRows);
 
-        case ConsoleKey.DownArrow:
-            newCursorTop = cursorTop + 1;
-            break;
+            if (winner)
+            {
+                Console.Clear();
+                Console.WriteLine("You win!");
+                break;
+            }
 
-        case ConsoleKey.LeftArrow:
-            newCursorLeft = cursorLeft - 1;
-            break;
-
-        case ConsoleKey.RightArrow:
-            newCursorLeft = cursorLeft + 1;
-            break;
+        } while (true);
     }
 
-    // Stay on the Map 
-    if (newCursorTop >= 0 && newCursorTop < mapRows.Length &&
-        newCursorLeft >= 0 && newCursorLeft < mapRows[newCursorTop].Length)
+    static bool TryMove(int proposedTop, int proposedLeft, string[] mazeRows)
     {
-        Console.SetCursorPosition(newCursorLeft, newCursorTop);
-    }
+        if (proposedTop < 0 || proposedTop >= mazeRows.Length)
+            return false;
 
-} while (true);
+        if (proposedLeft < 0 || proposedLeft >= mazeRows[proposedTop].Length)
+            return false;
+
+        char targetCell = mazeRows[proposedTop][proposedLeft];
+
+        if (targetCell == '#')
+            return false;
+
+        if (targetCell == '*')
+            return true;
+
+        Console.SetCursorPosition(proposedLeft, proposedTop);
+        return false;
+    }

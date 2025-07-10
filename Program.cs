@@ -10,6 +10,17 @@ string mazeRules = "MAZE RULES:\n" +
 
 Console.WriteLine(mazeRules);
 
-//Keep instructions up long enough for the person to read them
+// Keep instructions up long enough for the person to read them
 Console.WriteLine("Press any key to load maze...");
 Console.ReadKey(true);
+
+// Load maze 
+string[] mapRows = File.ReadAllLines("map.txt");
+
+// Display Maze
+foreach (string row in mapRows)
+{
+    Console.WriteLine(row);
+}
+
+

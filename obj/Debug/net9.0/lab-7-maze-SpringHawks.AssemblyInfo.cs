@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("lab-7-maze-SpringHawks")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+74d0d7d7705543bc5d4074e8d5ff2b5efa7e3dce")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d699d8d18fc1b5299955d69d95a407022106c1af")]
 [assembly: System.Reflection.AssemblyProductAttribute("lab-7-maze-SpringHawks")]
 [assembly: System.Reflection.AssemblyTitleAttribute("lab-7-maze-SpringHawks")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

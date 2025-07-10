@@ -23,4 +23,44 @@ foreach (string row in mapRows)
     Console.WriteLine(row);
 }
 
+// Start player at top left corner (0,0)
+Console.SetCursorPosition(0, 0);
+ConsoleKey keyStroke;
 
+bool winner = false;
+
+do
+{
+    keyStroke = Console.ReadKey(true).Key;
+
+    int cursorTop = Console.CursorTop;
+    int cursorLeft = Console.CursorLeft;
+
+    int newCursorTop = cursorTop;
+    int newCursorLeft = cursorLeft;
+
+    switch (keyStroke)
+    {
+        case ConsoleKey.Escape:
+            return;
+
+        case ConsoleKey.UpArrow:
+            newCursorTop = cursorTop - 1;
+            break;
+
+        case ConsoleKey.DownArrow:
+            newCursorTop = cursorTop + 1;
+            break;
+
+        case ConsoleKey.LeftArrow:
+            newCursorLeft = cursorLeft - 1;
+            break;
+
+        case ConsoleKey.RightArrow:
+            newCursorLeft = cursorLeft + 1;
+            break;
+    }
+
+    Console.SetCursorPosition(newCursorLeft, newCursorTop);
+
+} while (true);

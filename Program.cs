@@ -14,6 +14,9 @@ Console.WriteLine(mazeRules);
 Console.WriteLine("Press any key to load maze...");
 Console.ReadKey(true);
 
+Console.Clear();
+
+
 // Load maze 
 string[] mapRows = File.ReadAllLines("map.txt");
 
@@ -61,6 +64,11 @@ do
             break;
     }
 
-    Console.SetCursorPosition(newCursorLeft, newCursorTop);
+    // Stay on the Map 
+    if (newCursorTop >= 0 && newCursorTop < mapRows.Length &&
+        newCursorLeft >= 0 && newCursorLeft < mapRows[newCursorTop].Length)
+    {
+        Console.SetCursorPosition(newCursorLeft, newCursorTop);
+    }
 
 } while (true);

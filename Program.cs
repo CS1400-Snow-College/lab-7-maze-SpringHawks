@@ -1,9 +1,8 @@
-﻿//Annette Hawks
-//Due 7/9/2025
-//Lab 7 Maze 
-//Comment at top of Program.cs giving your name(s), the date, and the name of the lab
+﻿// Annette Hawks
+// Due 7/9/2025
+// Lab 7 Maze
 
-
+// Maze Rules
 string mazeRules = "MAZE RULES:\n" +
     "1. Use the arrow keys to navigate the maze.\n" +
     "2. The walls are hashtags (#).\n" +
@@ -11,5 +10,6 @@ string mazeRules = "MAZE RULES:\n" +
 
 Console.WriteLine(mazeRules);
 
-
-
+//Keep instructions up long enough for the person to read them
+Console.WriteLine("Press any key to load maze...");
+Console.ReadKey(true);
